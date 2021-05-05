@@ -1,0 +1,23 @@
+ 	IdArtista int PRIMARY KEY AUTO_INCREMENT,
+ 	NomeArtista varchar(200) not null,
+ 	NacionalidadeArtista varchar(200) not null
+);
+
+CREATE TABLE Obra(
+    IdObra int PRIMARY KEY AUTO_INCREMENT,
+    TituloObra varchar(50) not null,
+    Data SMALLINT(50),
+    Dimensao SMALLINT(50),
+    fk_artista_IdArtista int not null,
+    FOREIGN KEY(fk_artista_IdArtista) REFERENCES Artista(IdArtista)
+
+);
+
+
+	insert into Artista (NomeArtista,NacionalidadeArtista) values ("Lucas","São Paulo");
+	insert into Artista (NomeArtista,NacionalidadeArtista) values ("joao","Rio de Janeiro");
+
+	insert into Obra (TituloObra, Data, Dimensao, fk_artista_IdArtista) values ("liceu",2121,10,1);
+	insert into Obra (TituloObra, Data, Dimensao, fk_artista_IdArtista) values ("pooo",2022,11,2);
+
+	SELECT * FROM  Obra;
