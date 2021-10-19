@@ -1,0 +1,23 @@
+DELIMITER $$
+
+create function MultNumber(n1 float, n2 float) returns float 
+DETERMINISTIC
+
+BEGIN 
+     RETURN n1*n2;
+end $$
+DELIMITER ;
+
+SELECT MultNumber(1,6)+1.50;
+
+-- create view vw_PRODUCTS AS select  
+select 
+productID,
+productNAME,
+UnitPrice,
+ 1 + 2 as sum ,
+UnitsInStock,
+MultNumber(UnitPrice,UnitsInStock)  as total 
+from products; 
+
+-- select * from vw_PRODUCTS; -- UMA TABELA CRIADA DEPOIS DO WEW 

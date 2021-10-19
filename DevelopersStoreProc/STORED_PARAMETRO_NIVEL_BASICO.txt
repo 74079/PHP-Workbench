@@ -1,0 +1,83 @@
+DELIMITER //
+CREATE PROCEDURE GetProductsUnitPrice
+(
+   in pUnitPriceID int
+ )
+BEGIN 
+
+select * from products where UnitPrice >=  pUnitPriceID;
+END //DELIMITER ;
+
+call GetProductsUnitPrice(47);
+
+----------------------------------------------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE PROCEDURE GetProductsUnitPrice
+(
+   in pUnitPriceID int,
+   out pUnitPriceName varchar (200)
+) 
+BEGIN 
+declare A decimal (10,2) default 0;
+select ClasseA
+into A
+from products where UnitPrice =  pUnitPriceID;
+
+if A > 47 then
+set pUnitPriceName = 'ClasseA';
+
+end if;
+
+select pUnitPrice,
+		ClasseA
+        
+        from products where ClasseA > 47 
+        order by
+		ClasseA desc;
+
+
+END $$
+DELIMITER ;
+
+----------------------------------------------------------------------------------------------------------------
+
+
+BEGIN 
+-- declare A decimal (10,2) default 0;
+-- select ClasseA
+-- into A
+select *
+from products where UnitPrice >=  pUnitPriceID;
+
+if UnitPrice >= 47 then
+set pUnitPriceID = 'ClasseA';
+-- set pUnitPriceName = 'ClasseA';
+
+end if;
+
+END $$
+DELIMITER ;
+ call GetProductsUnitPrice(47);
+
+---------------------------------------------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE PROCEDURE GetProductsUnitPrice
+(
+   in UnitPriceID int
+   
+) 
+BEGIN 
+ declare UnitPrice decimal (10,2) default 0;
+ select * from products where UnitPrice >=  pUnitPriceID;
+
+if UnitPrice >= 47 then
+ set UnitPriceID = 'ClasseA';
+
+end if;
+
+END $$
+DELIMITER ;

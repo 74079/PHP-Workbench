@@ -1,0 +1,25 @@
+DELIMITER $$
+
+CREATE  PROCEDURE GetProducClassesLevel(
+    IN  idProduct INT, 
+    OUT productLevel  VARCHAR(20))
+BEGIN
+    DECLARE price decimal(10,2) DEFAULT 0;
+    SELECT PriceUnit
+    INTO price
+    FROM products
+    WHERE ProductID = idProduct;
+     set productLevel = productLevel(Price);
+END $$
+DELIMITER ;
+
+call GetProducClassesLevel(10,@productLevel);
+select @productLevel;
+
+select
+    @productLevel,
+    ProductID,
+	ProductName
+	from  products
+	order by
+			ProductName;

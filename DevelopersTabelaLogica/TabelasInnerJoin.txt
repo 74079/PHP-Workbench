@@ -1,0 +1,74 @@
+create table professor(
+Idprofessor int primary key auto_increment,
+nome varchar (50) not null,
+CPF int not null,
+idade int not null
+);
+
+insert into professor(CPF,nome,idade) values(46601,"Samuel",18),(1259,"Ricardo",34),(3448,"Lucas",41);
+
+
+create table Aluno(
+IdAluno int primary key auto_increment,
+nome varchar (50) not null,
+idade int not null,
+NomeResposavel varchar (50) not null,
+fk_Professor_Idprofessor int not null,
+foreign key(fk_Professor_Idprofessor) references professor (Idprofessor)
+);
+
+insert into Aluno(nome,idade,NomeResposavel,fk_Professor_Idprofessor) values("Neuza",45,"Neia",1),("Francisca",48,"Tereza",2),("Thamires",29,"Ivete",1),("Luciana",64,"Roberta",2),("Edicleia",30,"Clarice",3),("Cristina",25,"Luciene",1);
+
+create table disciplina(
+idDisciplina int primary key auto_increment,
+Nome varchar (50) not null
+);
+insert into Disciplina(Nome) values ("Matematica"),("Banco de dados"),("Gerenciamento de redes"),("Engenharia de software"),("Programacao orientada Objetos"),("Historia"),("Linguagem de algoritimos");
+
+create table frequenta(
+IdFrequenta int primary key auto_increment,
+fk_Aluno_IdAluno int not null,
+fk_disciplina_idDisciplina int not null,
+foreign key(fk_Aluno_IdAluno) references Aluno(IdAluno),
+foreign key(fk_disciplina_idDisciplina) references disciplina (idDisciplina)
+);
+
+insert into frequenta (fk_Aluno_IdAluno,fk_disciplina_idDisciplina) values (1,3),(1,1),(1,3),(1,6),(1,4);
+
+
+
+SELECT c.IdProfessor, c.nome, c.CPF professor, f.IdAluno, f.nome,f.idade,f.NomeResposavel  as Aluno
+from professor as c, Aluno as f
+
+SELECT c.IdProfessor, c.nome, c.CPF professor, f.IdAluno, f.nome,f.idade,f.NomeResposavel  as Aluno
+from professor as c
+INNER join Aluno as f on c.IdProfessor = f.IdAluno
+
+select count(*)quantidade, m.IdProfessor, m.nome, m.CPF professor, f.IdAluno, f.nome,f.idade,f.NomeResposavel  as Aluno
+from professor as m 
+inner join aluno as f on f.IdAluno= m.Idprofessor
+WHERE f.nome LIKE "%lucas%";
+
+
+select count(*)quantidade,e.nome from aluno m 
+inner join professor as e on e.Idprofessor = m.fk_Professor_Idprofessor
+WHERE e.nome LIKE "%lucas%";
+
+select 
+count(*)quantidade_Aluno,
+m.IdAluno,
+m.nome,
+m.fk_professor_IdProfessor
+from aluno as m
+inner join professor as e on e.IdProfessor = m.fk_professor_IdProfessor
+where  m.nome like  "%luciana%"
+
+SELECT * FROM aluno WHERE idade = 30 OR nome LIKE "luciana";
+
+SELECT * FROM professor WHERE Idprofessor > 4 OR Nome LIKE "samuel";
+
+SELECT AVG(totalAlunos) FROM professor;
+select avg(f.totalAlunos)quantidade_Aluno, e.nome aluno,f.idProfessor,f.nome as professor
+from aluno as e
+INNER join professor as f on f.Idprofessor = e.Idprofessor
+group by e.nome

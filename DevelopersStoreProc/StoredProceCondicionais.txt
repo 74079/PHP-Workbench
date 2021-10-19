@@ -1,0 +1,54 @@
+/*
+
+
+DELIMITER $$
+CREATE PROCEDURE GetProductsUnitPrice -- aqui ele cria uma strtocida referente ao nome da tabela que voce quer puxar
+(
+   in CodProduto int -- aqui sao os parametros da lista que que voce ira puxar 
+) 
+
+BEGIN 
+ select * from products -- aqui ele vai selecionar a tabela products 
+ where ProductID =  CodProduto; -- where onde o produtoID recebe o codigo desse produto que nesse casso o codigo e o ID.
+END $$
+DELIMITER ;
+
+call GetProductsUnitPrice(2); -- para fazer a bucar pelo qual ID codigo quero pegar desse produto
+------------------------------------------------------------------------------------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE GetProductsUnitPriceNome 
+(
+   in NomeProduto varchar(200)
+) 
+BEGIN 
+ select * from products 
+ where ProductName like concat('%',NomeProduto,'%');
+END $$
+DELIMITER ;
+
+call GetProductsUnitPriceNome('of'); 
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+//recebendo por parametro o codigo de uma categoria e retorna os games dessa categoria//
+
+DELIMITER $$
+CREATE PROCEDURE GetProductsCategories
+(
+   in IDcateg int
+) 
+BEGIN 
+ select c.CategoryID, c.ProductID, p.ProductName
+ from categories as c
+ 
+ inner join products p on p.ProductID = c.CategoryID
+ where CategoryID = IDcateg;
+END $$
+DELIMITER ;
+
+call GetProductsCategories(6); 
+
+*/

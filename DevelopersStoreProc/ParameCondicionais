@@ -1,0 +1,32 @@
+DELIMITER //
+
+create procedure BuscaIdProduto
+(
+	   in IdParanmetroEntrada int,
+	   out ClassicassaoProduto varchar(200)
+)
+  begin
+       declare PrecoItem dec(6,4);
+       select UnitPrice into PrecoItem from products where ProductID = IdParanmetroEntrada;
+       
+       if(PrecoItem > 47) then 
+          SET ClassicassaoProduto = "CLASSE A";
+       
+            else if(PrecoItem <= 47 and PrecoItem > 10) then
+                   set ClassicassaoProduto = "CLASSE B";
+                   else 
+				   set ClassicassaoProduto = "CLASSE C";
+		END IF;
+  END IF;
+ 
+ END //
+DELIMITER ;
+
+call BuscaIdProduto(10,@ClasProd);
+select @ClasProd,
+      ProductID,
+      ProductName,
+      UnitPrice
+      from  products where UnitPrice > 47
+      order by
+              ProductID desc;

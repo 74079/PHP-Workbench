@@ -1,0 +1,36 @@
+drop table employees_audit;
+create table employees_audit
+(
+id int auto_increment primary key,
+employeeNumber int not  null,
+lastname_old varchar (50) not null,
+lastname_new varchar (50) not null,
+changedat datetime default NULL,
+ACTION varchar (50) default NULL
+);
+
+SELECT * FROM classimodel.employees_audit;
+SELECT * FROM classimodel.employees;
+
+
+drop trigger before_employee_update;
+
+DELIMITER $$
+CREATE TRIGGER before_employee_update     
+BEFORE UPDATE ON employees    
+FOR EACH ROW     
+	BEGIN        
+		INSERT INTO employees_audit        
+		(action, changedat, employeeNumber, lastname_old, lastname_new)        
+		values         
+		('update', now(), old.EmployeeID, old.lastname, new.lastname);    
+	END $$
+DELIMITER ;
+
+SELECT * FROM classimodel.employees;
+SELECT * FROM classimodel.employees_audit;
+
+
+UPDATE employees
+   set lastNAME = 'react native'
+where employeeID = 2;

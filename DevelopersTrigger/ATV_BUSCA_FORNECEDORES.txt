@@ -1,0 +1,12 @@
+DELIMITER //
+
+ CREATE PROCEDURE GetSuppliersCountry
+ (
+      in CountryName varchar(200)
+ )
+ 
+ begin
+        select * from Suppliers where Country = CountryName ;
+end //
+DELIMITER ;
+call GetSuppliersCountry ('usa');

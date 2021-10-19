@@ -1,0 +1,104 @@
+/*
+CREATE TABLE banco(
+    idBanco int PRIMARY KEY AUTO_INCREMENT,
+    NomeBanco varchar(300) not null
+    );
+    
+  
+    CREATE TABLE cliente(
+    idCliente int PRIMARY KEY AUTO_INCREMENT,
+    nomeCliente varchar(50) not null,
+    CPF SMALLINT (20) not null,
+    idade SMALLINT (20) not null,
+    SexoCliente varchar (50) not null
+    );
+    
+   
+    
+ CREATE TABLE bancoCliente(
+    idBancoCliente int PRIMARY key AUTO_INCREMENT,
+    fk_banco_idBanco int not null,
+    fk_cliente_idCliente int not null,
+    FOREIGN KEY (fk_banco_idBanco ) REFERENCES banco(idBanco),
+    FOREIGN KEY (fk_cliente_idCliente ) REFERENCES cliente(idCliente)
+    );
+    
+    
+ insert into banco (nomeBanco) VALUES (" Banco santader"),(" Banco  do Brasil"),("  Banco Bradesco"),(" Banco Ital"),(" Caixa");
+ 
+ 
+ 
+
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("roberto",12630076605,25,"Masculino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Edino",987452136588,20,"Masculino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Bruno",982548916512,49,"Masculino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Lucineia",984826311,29,"Feminino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Bruna",4894189181218,41,"Feminino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Roberta",19819561858,35,"Feminino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Neuza",8945828261828,53,"Feminino");
+INSERT into cliente ( nomeCliente, CPF, idade,sexoCliente) VALUES ("Ricardo",82812894645,23,"Masculino");
+
+INSERT into bancoCliente ( fk_banco_idBanco ,fk_cliente_idCliente) VALUES (1,3);
+INSERT into bancoCliente ( fk_banco_idBanco ,fk_cliente_idCliente) VALUES (1,2);
+
+
+
+
+
+SELECT *FROM bancoCliente;
+
+
+
+
+CREATE TABLE conta(
+    idConta int PRIMARY KEY AUTO_INCREMENT,
+    senha SMALLINT (50) not null,
+    numero SMALLINT (50) not null,
+    agencia SMALLINT (50) not null,
+    tipoConta varchar(50) not null
+    );
+    
+    
+    
+INSERT INTO conta (senha, numero, agencia, tipoConta) VALUES (1919,4742,1996-2,"poupanca");
+INSERT INTO conta (senha, numero, agencia, tipoConta) VALUES (3838,9178,6032-2,"corrente");
+INSERT INTO conta (senha, numero, agencia, tipoConta) VALUES (1515,8456,9782-2,"correntista");
+INSERT INTO conta (senha, numero, agencia, tipoConta) VALUES (4545,9091,7845-2,"salario");
+
+
+CREATE TABLE Endereço(
+    idEndereço int PRIMARY KEY AUTO_INCREMENT,
+    NomeCidade varchar (50) not null,
+    NomeBairro varchar (50) not null,
+    NomeRua varchar (50) not null,
+    NumeroCasa varchar (50) not null,
+    Telefone SMALLINT (50) not null
+    );
+    
+ 
+insert into endereço (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone) VALUES ("Hortolandia","pq do horto","Crisantemo",135,1998956516);
+insert into endereço (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone) VALUES ("sumare","sao jorge","hortencia",875,1965458756);
+insert into endereço (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone) VALUES ("Campinas","horto","lirio",642,02187552);
+insert into endereço (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone) VALUES ("Campinas","sao matheus","lirio",325,038899968);
+
+CREATE TABLE Conta_Cliente(
+       idContaCliente int PRIMARY KEY AUTO_INCREMENT,
+       fk_Conta int not null,
+       fk_Endereço int not null,
+       FOREIGN KEY(fk_Conta) REFERENCES Conta(idConta),
+       FOREIGN KEY(fk_Endereço) REFERENCES Endereço(idEndereço)
+       );
+
+INSERT into Conta_Cliente ( senha, numero, agencia, tipoConta fk_Conta,fk_Endereço) VALUES (1919,4742,1996-2,"poupanca",1,2);
+INSERT into Conta_Cliente ( senha, numero, agencia, tipoConta fk_Conta,fk_Endereço) VALUES (3838,9178,6032-2,"corrente",1,2);
+INSERT into Conta_Cliente ( senha, numero, agencia, tipoConta fk_Conta,fk_Endereço) VALUES (1515,8456,9782-2,"correntista",1,2);
+INSERT into Conta_Cliente ( senha, numero, agencia, tipoConta fk_Conta,fk_Endereço) VALUES (4545,9091,7845-2,"salario",1,2);
+
+INSERT into Conta_Cliente (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone, fk_Conta,fk_Endereço) VALUES ("Hortolandia","pq do horto","Crisantemo",135,1998956516,1,1);
+INSERT into Conta_Cliente (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone, fk_Conta,fk_Endereço) VALUES ("sumare","sao jorge","hortencia",875,1965458756,1,1);
+INSERT into Conta_Cliente (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone, fk_Conta,fk_Endereço) VALUES ("Campinas","horto","lirio",642,02187552,1,1);
+INSERT into Conta_Cliente (NomeCidade, NomeBairro, NomeRua, numeroCasa, telefone, fk_Conta,fk_Endereço) VALUES ("Campinas","sao matheus","lirio",325,038899968,1,1);
+ 
+ */
+ 
+ SELECT *from banco,endereço,bancocliente , Conta_Cliente, cliente;

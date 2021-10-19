@@ -1,0 +1,67 @@
+SELECT c.nomeBanco banco, f.nomeCliente,f.TipoCPF,f.TipoIdade,f.SexoCliente  as cliente
+from banco as c, cliente as f
+where c.idBanco = f.idCliente
+
+SELECT c.idBanco, c.nomeBanco banco,f.idCliente, f.nomeCliente,f.TipoCPF,f.TipoIdade,f.SexoCliente  as cliente
+from banco as c
+INNER join cliente as f on c.idBanco = f.idCliente
+
+select count(*)quantidade,m.NomeBanco banco, f.nomeCliente as cliente
+from banco as m 
+inner join cliente as f on f.idCliente= m.idBanco
+WHERE f.nomeCliente LIKE "%edino%";
+
+select count(*)quantidade,e.nomeCliente from bancoCliente as m 
+inner join cliente as e on e.idCliente= m.fk_cliente_idCliente
+WHERE e.nomeCliente LIKE "%edino%";
+
+select count(*)quantidade,e.nomeCliente,e.TipoIdade from bancoCliente as m 
+INNER join cliente as e on e.idCliente= m.fk_cliente_idCliente
+WHERE  e.TipoIdade  <= 30;
+
+select count(*)quantidade, c.NomeCliente cliente, f.idBanco,f.nomeBanco as banco
+from cliente as c
+inner join banco as f on f.idBanco = c.idCliente
+group by c.nomeCliente;
+ORDER BY c.nomeCliente;
+
+select count(*)quantidade,  c.NomeBanco banco, f.idCliente,f.nomeCliente as cliente
+from banco as c
+inner join cliente as f on f.idCliente = c.idBanco
+group by f.nomeCliente;
+ORDER BY c.nomeCliente;
+
+SELECT AVG(totalClientes) FROM banco;
+select avg(f.totalClientes)quantidade_cliente, e.nomeCliente,e.TipoCPF cliente,f.idBanco,f.nomeBanco as banco
+from cliente as e
+INNER join banco as f on f.idBanco = e.idCliente
+group by e.nomeCliente 
+
+SELECT * FROM cliente WHERE TipoIdade = 49 OR nomeCliente LIKE "Bruno";
+SELECT * FROM endereço WHERE Numero = 9875 OR rua LIKE "izabel";
+SELECT * FROM endereço WHERE Numero = 82 OR rua LIKE "izabel";
+
+SELECT * FROM banco WHERE idBanco > 4 OR NomeBanco LIKE "santader";
+SELECT * FROM cliente WHERE sexoCliente = "f" AND idCliente > 4 AND nomeCliente LIKE "lucineia";
+SELECT * FROM cliente WHERE sexoCliente = "f" AND idCliente > 4 AND nomeCliente LIKE "lucineia";
+
+
+SELECT c.nomeTipoCorrebte,c.nomeTipoSalario,c.nomeTipoPoupança tipoconta, f.nomeCliente as cliente
+from tipoconta as c
+INNER JOIN cliente as f on c.idTipoConta = f.idCliente
+
+SELECT c.TipoSenha,c.TipoNumero,c.TipoAgencia conta, f.nomeCliente as cliente
+from conta as c
+INNER JOIN cliente as f on c.idConta = f.idCliente
+
+SELECT c.NomeCidade,c.NomeBairro,c.NomeRua,c.TipoNumero,c.TipoTelefone endereço, f.nomeCliente as cliente
+from endereço as c
+INNER JOIN cliente as f on c.idEndereço = f.idCliente
+
+SELECT c.nomeBanco banco, f.NomeUsuario,f.SenhaUsuario,f.fk_banco_idBanco as usuario
+from banco as c
+inner join usuario as f on c.idBanco = f.idUsuario
+
+SELECT c.idUsuario, c.NomeUsuario usuario, f.nome_TipoFuncionario,f.funcao_TipoFuncionario as tipofuncionario
+from  usuario as c
+inner join tipofuncionario as f on c.idUsuario = f.idTipoFuncionario

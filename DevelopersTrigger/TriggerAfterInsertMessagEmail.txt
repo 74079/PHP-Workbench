@@ -1,0 +1,64 @@
+drop table members;
+
+create table members
+(
+id int auto_increment,
+name varchar(200) not null,
+email varchar (200),
+birthDate date,
+primary key (id)
+);
+
+SELECT * FROM classimodel.members;
+
+
+
+DELIMITER $$
+CREATE TRIGGER AFTER_member_INSERT    
+AFTER INSERT ON members    
+FOR EACH ROW     
+	BEGIN        
+		INSERT INTO members        
+		(id, birthDate, name, email)        
+		values         
+		('INSERT' ,now(), old.memberId, old.name, old.email);    
+	END $$
+DELIMITER ;
+
+INSERT members 
+SET     
+   name = 'lucas',
+
+     email = 'henriquefagundes40@gmail.com';
+
+
+DELIMITER $$
+CREATE TRIGGER AFTER_member_INSERT     
+AFTER INSERT ON members    
+FOR EACH ROW     
+	BEGIN        
+    declare v_codigo int default 0;
+    set v_codigo = (select max(id)from members);
+		INSERT INTO remiders        
+		(memberId, name, message)        
+		values         
+		(memberId, name, message,v_codigo);    
+	END $$
+DELIMITER ;
+
+INSERT remiders
+   set 
+      memberId = id,
+      
+      message = (name,'please update your date of birrth');
+     
+drop table remiders;
+create table remiders 
+(
+id int auto_increment,
+memberId int,
+message varchar(250) not null,
+primary key (id, memberId)
+);
+
+SELECT * FROM classimodel.remiders;

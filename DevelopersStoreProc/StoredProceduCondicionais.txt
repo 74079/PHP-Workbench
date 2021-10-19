@@ -1,0 +1,36 @@
+DELIMITER $$
+
+CREATE  PROCEDURE GetProductsLevel(
+    IN  idProduct INT, 
+    OUT productLevel  VARCHAR(20))
+BEGIN
+    DECLARE price float DEFAULT 0;
+
+    SELECT UnitPrice 
+    INTO price
+    FROM products
+    WHERE ProductID = idProduct;
+    
+    select price;
+
+    IF price > 47 THEN
+        SET productLevel = 'Class A';
+    ELSEIF price <= 47 AND price > 10 THEN
+        SET productLevel = 'Class B';
+    ELSE
+        SET productLevel = 'Class C';
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+CALL GetProductsLevel(10, @level);
+select @level;
+    select products
+	ProductID,
+	ProductName,
+	PriceUnit
+	from  products where preco > 47
+	order by
+			ProductID desc;

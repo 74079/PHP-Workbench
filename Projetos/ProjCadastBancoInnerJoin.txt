@@ -1,0 +1,226 @@
+
+CREATE TABLE banco(
+    idBanco int PRIMARY KEY AUTO_INCREMENT,
+    nomeBanco varchar(100) not null
+    );
+CREATE TABLE cliente(
+    idCliente int PRIMARY KEY AUTO_INCREMENT,
+    nomeCliente varchar(250) not null,
+    TipoCPF varchar (250) not null,
+    TipoIdade int (100) not null,
+    SexoCliente varchar (100) not null
+    );
+    
+insert into banco (nomeBanco) VALUES ("santader"),("Banco  do Brasil"),("Bradesco"),(" Ital"),("Caixa");
+
+INSERT into cliente ( nomeCliente, TipoCPF, TipoIdade,sexoCliente) VALUES ("roberto",12630076605,25,"M");
+INSERT into cliente ( nomeCliente, TipoCPF, TipoIdade,sexoCliente) VALUES ("Matheus",12865432409,65,"M");
+INSERT into cliente ( nomeCliente, TipoCPF, TipoIdade,sexoCliente) VALUES ("Edino",17345136508,20,"M");
+INSERT into cliente ( nomeCliente, TipoCPF, TipoIdade,sexoCliente) VALUES ("Bruno",28254891606,49,"M");
+INSERT into cliente ( nomeCliente, TipoCPF, TipoIdade,sexoCliente) VALUES ("Lucineia",18482631104,29,"F");
+INSERT into cliente ( nomeCliente, TipoCPF, TipoIdade,sexoCliente) VALUES ("Bruna",28941891805,41,"F");
+
+CREATE TABLE bancoCliente(
+    idBancoCliente int PRIMARY key AUTO_INCREMENT,
+    fk_banco_idBanco int not null,
+    fk_cliente_idCliente int not null,
+    FOREIGN KEY (fk_banco_idBanco) REFERENCES banco(idBanco),
+    FOREIGN KEY (fk_cliente_idCliente) REFERENCES cliente(idCliente)
+    );
+
+INSERT into bancoCliente (fk_banco_idBanco,fk_cliente_idCliente) VALUES(1,1);
+INSERT into bancoCliente (fk_banco_idBanco,fk_cliente_idCliente) VALUES(1,2);
+INSERT into bancoCliente (fk_banco_idBanco,fk_cliente_idCliente) VALUES(1,1);
+INSERT into bancoCliente (fk_banco_idBanco,fk_cliente_idCliente) VALUES(1,2);
+INSERT into bancoCliente (fk_banco_idBanco,fk_cliente_idCliente) VALUES(1,2);
+INSERT into bancoCliente (fk_banco_idBanco,fk_cliente_idCliente) VALUES(1,1);
+
+ CREATE TABLE conta(
+    idConta int PRIMARY KEY AUTO_INCREMENT,
+    TipoSenha varchar (100) not null,
+    TipoNumero varchar (100) not null,
+    TipoAgencia varchar (100) not null
+    );
+ 
+INSERT INTO conta (TipoSenha, TipoNumero, TipoAgencia) VALUES (1919,4742,19961);
+INSERT INTO conta (TipoSenha, TipoNumero, TipoAgencia) VALUES (3838,9178,60323);
+INSERT INTO conta (TipoSenha, TipoNumero, TipoAgencia) VALUES (1515,8456,97827);
+INSERT INTO conta (TipoSenha, TipoNumero, TipoAgencia) VALUES (4545,9091,78454);
+
+CREATE TABLE TipoConta(
+    idTipoConta int PRIMARY KEY AUTO_INCREMENT,
+    nomeTipoConta varchar(50) not null
+    );
+INSERT INTO TipoConta (nomeTipoConta) VALUES ("poupanca"),("corrente"),("salario");
+
+
+CREATE TABLE Endereço(
+    idEndereço int PRIMARY KEY AUTO_INCREMENT,
+    Cidade varchar (100) not null,
+    Bairro varchar (100) not null,
+    Rua varchar (100) not null,
+    Numero int (100)  not null,
+    Cep varchar(250)not null
+    );
+    
+insert into endereço (Cidade, Bairro, Rua, Numero,Cep) VALUES ("Hortolandia","rosolem","Matias",139,4951247);
+insert into endereço (Cidade, Bairro, Rua, Numero,Cep) VALUES ("sumare","sao jorge","hortencia",875,9654781);
+insert into endereço (Cidade, Bairro, Rua, Numero,Cep) VALUES ("Campinas","guanabara","lirio",642,8254868);
+insert into endereço (Cidade, Bairro, Rua, Numero,Cep) VALUES ("Piracicaba","sao clemente","Izabel",9875,78479425);
+insert into endereço (Cidade, Bairro, Rua, Numero,Cep) VALUES ("Indaiatuba","sao matheus","Fracisco",125,8584895);
+insert into endereço (Cidade, Bairro, Rua, Numero,Cep) VALUES ("Valinhos","Centro","Av Andrade neves",725,98544897);
+
+CREATE TABLE ContatoCliente(
+    idContatoCliente int PRIMARY KEY AUTO_INCREMENT,
+    DDD varchar(100) not null,
+    Celular varchar(250) not null,
+    Telefone varchar(250) not null,
+    Gmail varchar (150) not null
+    );
+
+insert into ContatoCliente (DDD,Celular,Telefone, Gmail) VALUES (019,984951247,34951247,"roberto@65gmail.com");
+insert into ContatoCliente (DDD,Celular,Telefone, Gmail) VALUES (019,989654781,39654781,"Matheus@484gmail.com");
+insert into ContatoCliente (DDD,Celular,Telefone, Gmail) VALUES (019,998254868,38254868,"Edino@j9gmail.com");
+insert into ContatoCliente (DDD,Celular,Telefone, Gmail) VALUES (019,978479425,38479425,"Bruno@87gmail.com");
+insert into ContatoCliente (DDD,Celular,Telefone, Gmail) VALUES (019,998584895,38584895,"Lucineia@e9gmail.com");
+insert into ContatoCliente (DDD,Celular,Telefone, Gmail) VALUES (019,998544897,38544897,"Bruna@889gmail.com");
+
+CREATE TABLE ContaCliente(
+       idContaCliente int PRIMARY KEY AUTO_INCREMENT,
+       fk_Conta int not null,
+       fk_Endereço int not null,
+       fk_TipoConta int not null,
+       fk_ContatoCliente int not null,
+       FOREIGN KEY(fk_Conta)REFERENCES Conta(idConta),
+       FOREIGN KEY(fk_Endereço)REFERENCES Endereço(idEndereço),
+       FOREIGN KEY(fk_TipoConta)REFERENCES TipoConta(idTipoConta),
+       FOREIGN KEY(fk_ContatoCliente) REFERENCES ContatoCliente(idContatoCliente)
+       );
+
+INSERT into ContaCliente ( fk_Conta,fk_Endereço,fk_TipoConta,fk_ContatoCliente) VALUES (1,1,2,1);
+INSERT into ContaCliente ( fk_Conta,fk_Endereço,fk_TipoConta,fk_ContatoCliente) VALUES (1,2,1,2);
+INSERT into ContaCliente ( fk_Conta,fk_Endereço,fk_TipoConta,fk_ContatoCliente) VALUES (1,2,3,1);
+INSERT into ContaCliente ( fk_Conta,fk_Endereço,fk_TipoConta,fk_ContatoCliente) VALUES (2,1,2,1);
+INSERT into ContaCliente ( fk_Conta,fk_Endereço,fk_TipoConta,fk_ContatoCliente) VALUES (1,2,1,2);
+
+CREATE TABLE Usuario(
+    idUsuario int PRIMARY KEY AUTO_INCREMENT,
+    NomeUsuario varchar(100) not null,
+    Senha_Usuario varchar(100) not null,
+    fk_banco_idBanco int not null,
+    FOREIGN KEY(fk_banco_idBanco)REFERENCES banco(idBanco)
+    );
+
+INSERT INTO Usuario (NomeUsuario,Senha_Usuario,fk_banco_idBanco) VALUES ("Lucas",6695,1);
+INSERT INTO Usuario (NomeUsuario,Senha_Usuario,fk_banco_idBanco) VALUES ("Edilson",4742,1);
+INSERT INTO Usuario (NomeUsuario,Senha_Usuario,fk_banco_idBanco) VALUES ("Roberto",4742,1);
+INSERT INTO Usuario (NomeUsuario,Senha_Usuario,fk_banco_idBanco) VALUES ("Matheus",4742,2);
+
+
+CREATE TABLE TipoFuncionario(
+    idTipoFuncionario int PRIMARY KEY AUTO_INCREMENT,
+    nome_TipoFuncionario varchar (100) not null,
+    funcao_TipoFuncionario varchar (100) not null
+    );
+
+
+
+INSERT INTO TipoFuncionario (nome_TipoFuncionario,funcao_TipoFuncionario) VALUES ("roberto","gerente");
+INSERT INTO TipoFuncionario (nome_TipoFuncionario,funcao_TipoFuncionario) VALUES ("Rogerio","supervisor");
+INSERT INTO TipoFuncionario (nome_TipoFuncionario,funcao_TipoFuncionario) VALUES ("Bruno","conferente");
+INSERT INTO TipoFuncionario (nome_TipoFuncionario,funcao_TipoFuncionario) VALUES ("Jose","lider");
+ 
+CREATE TABLE Usuario_funcionario(
+    idUsuario_funcionario int PRIMARY KEY AUTO_INCREMENT,
+    fk_usuario int not null,
+    fk_TipoFuncionario int not null,
+    FOREIGN KEY(fk_usuario)REFERENCES Usuario(idUsuario),
+    FOREIGN  KEY(fk_TipoFuncionario)REFERENCES TipoFuncionario(idTipoFuncionario)
+    );
+
+    
+INSERT into Usuario_Funcionario ( fk_Usuario ,fk_TipoFuncionario) VALUES (1,3);
+INSERT into Usuario_Funcionario ( fk_Usuario ,fk_TipoFuncionario) VALUES (1,4);
+INSERT into Usuario_Funcionario ( fk_Usuario ,fk_TipoFuncionario) VALUES (1,2);
+INSERT into Usuario_Funcionario ( fk_Usuario ,fk_TipoFuncionario) VALUES (1,1);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+SELECT c.nomeBanco banco, f.nomeCliente,f.TipoCPF,f.TipoIdade,f.SexoCliente  as cliente
+from banco as c, cliente as f
+where c.idBanco = f.idCliente
+
+SELECT c.idBanco, c.nomeBanco banco,f.idCliente, f.nomeCliente,f.TipoCPF,f.TipoIdade,f.SexoCliente  as cliente
+from banco as c
+INNER join cliente as f on c.idBanco = f.idCliente
+
+select count(*)quantidade,m.NomeBanco banco, f.nomeCliente as cliente
+from banco as m 
+inner join cliente as f on f.idCliente= m.idBanco
+WHERE f.nomeCliente LIKE "%edino%";
+
+select count(*)quantidade,e.nomeCliente from bancoCliente as m 
+inner join cliente as e on e.idCliente= m.fk_cliente_idCliente
+WHERE e.nomeCliente LIKE "%edino%";
+
+select count(*)quantidade,e.nomeCliente,e.TipoIdade from bancoCliente as m 
+INNER join cliente as e on e.idCliente= m.fk_cliente_idCliente
+WHERE  e.TipoIdade  <= 30;
+
+
+select count(*)quantidade, c.NomeCliente cliente, f.idBanco,f.nomeBanco as banco
+from cliente as c
+inner join banco as f on f.idBanco = c.idCliente
+group by c.nomeCliente;
+ORDER BY c.nomeCliente;
+
+
+select count(*)quantidade,  c.NomeBanco banco, f.idCliente,f.nomeCliente as cliente
+from banco as c
+inner join cliente as f on f.idCliente = c.idBanco
+group by f.nomeCliente;
+ORDER BY c.nomeCliente;
+
+
+SELECT AVG(totalClientes) FROM banco;
+select avg(f.totalClientes)quantidade_cliente, e.nomeCliente,e.TipoCPF cliente,f.idBanco,f.nomeBanco as banco
+from cliente as e
+INNER join banco as f on f.idBanco = e.idCliente
+group by e.nomeCliente 
+
+
+SELECT * FROM cliente WHERE TipoIdade = 49 OR nomeCliente LIKE "Bruno";
+SELECT * FROM endereço WHERE Numero = 9875 OR rua LIKE "izabel";
+SELECT * FROM endereço WHERE Numero = 82 OR rua LIKE "izabel";
+
+
+
+SELECT * FROM banco WHERE idBanco > 4 OR NomeBanco LIKE "santader";
+SELECT * FROM cliente WHERE sexoCliente = "f" AND idCliente > 4 AND nomeCliente LIKE "lucineia";
+SELECT * FROM cliente WHERE sexoCliente = "f" AND idCliente > 4 AND nomeCliente LIKE "lucineia";
+
+
+
+SELECT c.nomeTipoCorrebte,c.nomeTipoSalario,c.nomeTipoPoupança tipoconta, f.nomeCliente as cliente
+from tipoconta as c
+INNER JOIN cliente as f on c.idTipoConta = f.idCliente
+
+
+SELECT c.TipoSenha,c.TipoNumero,c.TipoAgencia conta, f.nomeCliente as cliente
+from conta as c
+INNER JOIN cliente as f on c.idConta = f.idCliente
+
+
+SELECT c.NomeCidade,c.NomeBairro,c.NomeRua,c.TipoNumero,c.TipoTelefone endereço, f.nomeCliente as cliente
+from endereço as c
+INNER JOIN cliente as f on c.idEndereço = f.idCliente
+
+
+
+SELECT c.nomeBanco banco, f.NomeUsuario,f.SenhaUsuario,f.fk_banco_idBanco as usuario
+from banco as c
+inner join usuario as f on c.idBanco = f.idUsuario
+
+
+
+SELECT c.idUsuario, c.NomeUsuario usuario, f.nome_TipoFuncionario,f.funcao_TipoFuncionario as tipofuncionario
+from  usuario as c
+inner join tipofuncionario as f on c.idUsuario = f.idTipoFuncionario
